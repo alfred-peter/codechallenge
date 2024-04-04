@@ -1,81 +1,69 @@
-// Function to calculate payee (tax) based on basic salary
-function calculatePayee(basicSalary) {
-    let payee = 0;
-    if (basicSalary <= 24000) {
-        payee = 0;
-    } else if (basicSalary <= 32333) {
-        payee = (basicSalary - 24000) * 0.1;
-    } else if (basicSalary <= 40333) {
-        payee = 833 + (basicSalary - 32333) * 0.15;
-    } else if (basicSalary <= 48333) {
-        payee = 2500 + (basicSalary - 40333) * 0.2;
-    } else if (basicSalary <= 57333) {
-        payee = 4583 + (basicSalary - 48333) * 0.25;
-    } else {
-        payee = 8125 + (basicSalary - 57333) * 0.3;
-    }
-    return payee;
+let gross = prompt("Enter the gross salary");
+
+let payee;
+if (gross <= 24000){
+    payee = 10;
+}
+else if (gross > 24000 && gross <= 32333){
+    payee = 25;
+}
+else{
+    payee = 30;
+}
+let tax = (gross * payee) / 100;
+let housingLevy = (gross * 1.5) / 100;
+
+let nhif;
+if((gross <= 5999 )){
+    nhif = 150;
+}
+else if ((gross >= 6000 && gross <= 7999)){
+    nhif = 300;
+}
+else if ((gross >= 8000 && gross <= 11999)){
+    nhif = 400;
+}
+else if ((gross >= 12000 && gross <= 14999)){
+    nhif = 500;
+}
+else if ((gross >= 15000 && gross <= 19999)){
+    nhif = 600;
+}
+else if ((gross >= 20000 && gross <= 24999)){
+    nhif = 750;
+}
+else if ((gross >= 25000 && gross <= 29999)){
+    nhif = 850;
+}
+else if ((gross >= 30000 && gross <= 34999)){
+    nhif = 900;
+}
+else if ((gross >= 35000 && gross <= 39999)){
+    nhif = 950;
+}
+else if ((gross >= 40000 && gross <= 44999)){
+    nhif = 1000;
+}
+else if ((gross >= 45000 && gross <= 49999)){
+    nhif = 1050;
+}
+else if ((gross >= 50000 && gross <= 59999)){
+    nhif = 1200;
+}
+else if ((gross >= 60000 && gross <= 69999)){
+    nhif = 1300;
+}
+else if ((gross >= 70000 && gross <= 79999)){
+    nhif = 1400;
+}
+else if ((gross >= 80000 && gross <= 89999)){
+    nhif = 1500;
+}
+else if ((gross >= 90000 && gross <= 99999)){
+    nhif = 1600;
 }
 
-// Function to calculate NHIF deductions based on basic salary
-function calculateNHIF(basicSalary) {
-    let nhifDeductions = 0;
-    // Define NHIF deduction bands and their corresponding amounts
-    const nhifBands = [
-        { upperLimit: 5999, amount: 150 },
-        { upperLimit: 7999, amount: 300 },
-        { upperLimit: 11999, amount: 400 },
-        { upperLimit: 14999, amount: 500 },
-        { upperLimit: 19999, amount: 600 },
-        { upperLimit: 24999, amount: 750 },
-        { upperLimit: 29999, amount: 850 },
-        { upperLimit: 34999, amount: 900 },
-        { upperLimit: 39999, amount: 1000 },
-        { upperLimit: 44999, amount: 1100 },
-        { upperLimit: 49999, amount: 1200 },
-        { upperLimit: 59999, amount: 1300 },
-        { upperLimit: 69999, amount: 1400 },
-        { upperLimit: 79999, amount: 1500 },
-        { upperLimit: 89999, amount: 1600 },
-        { upperLimit: Infinity, amount: 1700 }
-    ];
+nssf = 400;
 
-    // Find the appropriate NHIF band for the given basic salary
-    for (const band of nhifBands) {
-        if (basicSalary <= band.upperLimit) {
-            nhifDeductions = band.amount;
-            break;
-        }
-    }
-    return nhifDeductions;
-}
-
-// Function to calculate NSSFDeductions based on basic salary
-function calculateNSSF(basicSalary) {
-    const nssfDeductions = Math.min(basicSalary * 0.06, 2000);
-    return nssfDeductions;
-}
-
-// Function to calculate gross salary
-function calculateGrossSalary(basicSalary, benefits) {
-    const grossSalary = basicSalary + benefits;
-    return grossSalary;
-}
-
-// Function to calculate net salary
-function calculateNetSalary(basicSalary, benefits) {
-    const payee = calculatePayee(basicSalary);
-    const nhifDeductions = calculateNHIF(basicSalary);
-    const nssfDeductions = calculateNSSF(basicSalary);
-    const grossSalary = calculateGrossSalary(basicSalary, benefits);
-    const netSalary = grossSalary - (payee + nhifDeductions + nssfDeductions);
-    return netSalary;
-}
-
-// Main program
-const basicSalary = parseFloat(prompt("Enter basic salary:"));
-const benefits = parseFloat(prompt("Enter benefits:"));
-
-const netSalary = calculateNetSalary(basicSalary, benefits);
-
-console.log("Net Salary:", netSalary);
+let netSalary = gross -(tax + nssf +nhif + housingLevy);
+console.log("Your net salary: " + netSalary)
