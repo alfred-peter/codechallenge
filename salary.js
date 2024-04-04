@@ -1,6 +1,4 @@
-let gross = prompt("Enter the gross salary");
-
-let payee;
+function calculatenetSalary(gross){
 if (gross <= 24000){
     payee = 10;
 }
@@ -65,5 +63,6 @@ else if ((gross >= 90000 && gross <= 99999)){
 
 nssf = 400;
 
-let netSalary = gross -(tax + nssf +nhif + housingLevy);
-console.log("Your net salary: " + netSalary)
+ let netsalary = gross -(tax + nssf +nhif + housingLevy);
+}
+calculatenetSalary(99999)
